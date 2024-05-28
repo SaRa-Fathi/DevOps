@@ -13,39 +13,32 @@ echo $userChoice
 if [[ $userChoice -eq 1 ]]
 then
 	read -p "Enter User Name: " userName
-	#if [[ sudo useradd $userName ]]
-	#then
 	sudo useradd $userName
 	if [[ $? -eq 0 ]]
 	then
 		echo "$userName added successfully!"
 	else
-	#then 
 		echo "something was wrong"
 	fi
 
 elif [[ $userChoice -eq 2 ]]
 then
 	read -p "Enter User Name to remove : " userToDelete
-        #if [[ sudo adddel $userToDelete ]]
 	sudo userdel $userToDelete
  	if [[ $? -eq 0 ]]        
 	then
                 echo "$userToDelete deleted successfully!"
 	else
-        #then
 		 echo "something was wrong"
         fi             
 elif [[ $userChoice -eq 3 ]]
 then 
 	read -p "Enter User Name to change password : " userToChangePassword
         sudo passwd $userToChangePassword 
-	#if [[ sudo passwd $userToChangePassword ]]
 	if [[ $? -eq 0 ]]
         then
                 echo "Password of user $userToChangePassword updated successfully!"
 	else
-        #then
                  echo "something was wrong"
         fi
 
