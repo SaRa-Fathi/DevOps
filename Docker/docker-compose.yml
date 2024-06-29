@@ -1,0 +1,25 @@
+version: '2.23.1'
+services:
+        mongo-db-service:
+                        image: mongo:5.0.27
+                        container_name: mongo-db-cont
+                        environment:
+                                   MONGO_INITDB_ROOT_USERNAME: admin
+                                   MONGO_INITDB_ROOT_PASSWORD: admin
+                        volumes:
+                          - mongo-volume:/data/db
+        mongo-express-service:
+                        image: mongo-express:1.0.2-18-alpine3.19
+                        container_name: mongo-express-cont
+                        environment:
+                               ME_CONFIG_MONGODB_SERVER: mongo-db-cont
+                               ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+                               ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+                               ME_CONFIG_BASICAUTH: false
+                        ports:
+                                 - "8081:8081"
+                        depends_on:
+                                 - mongo-db-service
+volumes:
+  mongo-volume:
+
